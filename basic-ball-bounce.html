@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Ball Bounce</title>
+</head>
+<body>
+<canvas id="canvas" width="600" height="300"></canvas>
+<script>
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+var raf;
+
+var ball = {
+  x: 100,
+  y: 100,
+  dx: 5,
+  dy: 7,
+  radius: 25,
+  color: 'blue'
+};
+
+function circle(x, y, r, color) {
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI*2, true);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    circle(ball.x, ball.y, 25, "blue");
+    if (ball.x+ball.dx > canvas.width || ball.x+ball.dx < 0) {
+      ball.dx = -ball.dx;
+    }
+    if (ball.y+ball.dy > canvas.height || ball.y+ball.dy < 0) {
+      ball.dy = -ball.dy;
+    }
+    ball.x += ball.dx;
+    ball.y += ball.dy;
+    raf = window.requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>
